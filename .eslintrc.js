@@ -52,6 +52,7 @@ module.exports = {
     ],
     'no-console': 0,
     'import/prefer-default-export': 0,
+    'import/no-extraneous-dependencies': 0,
     import: 0,
     'func-names': 0,
     'space-before-function-paren': 0,
