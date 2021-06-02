@@ -1,14 +1,16 @@
 import css from 'styled-jsx/css';
-import { fonts } from 'styles/theme';
+import { fonts, colors } from 'styles/theme';
 
 export default css.global`
   html,
   body {
     font-family: ${fonts.base};
+    background: ${colors.mainBackground};
+    color: ${colors.mainFont};
   }
 
   a {
-    color: black;
+    color: ${colors.mainFont};
     text-decoration: none;
   }
 

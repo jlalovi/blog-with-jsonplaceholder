@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { SWRConfig } from 'swr';
 import Head from 'next/head';
 import globalStyles from 'styles/globalStyles';
+import NavBar from 'components/NavBar';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <NavBar />
       <Component {...pageProps} />
       <style jsx global>
         {globalStyles}

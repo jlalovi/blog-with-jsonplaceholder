@@ -1,5 +1,11 @@
 export const fonts = {
-  base: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  base: 'monospace',
 };
 
-export const colors = {};
+export const colors = {
+  mainBackground: '#fff',
+  mainFont: '#333',
+  navBackground: '#fff',
+  navFont: '#333',
+  separator: '#33333399',
+};
