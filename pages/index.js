@@ -1,5 +1,15 @@
 import { useEffect, useState } from 'react';
 import usePostsList from 'hooks/usePostsList';
+import useCommentsList from 'hooks/useCommentsList';
+import PostCard from 'components/PostCard';
+import css from 'styled-jsx/css';
+
+const homeStyles = css`
+  div {
+    text-align: center;
+    margin-top: 36px;
+  }
+`;
 
 /**
  * @desc Fetch a list of users with an specific ID
@@ -19,11 +29,10 @@ const getUsers = (usersToRequest) => {
 };
 
 export default function Home() {
-  const { posts, isLoading, error } = usePostsList();
   const [requestedUsers, setRequestedUsers] = useState({});
   const [usersToRequest, setUsersToRequest] = useState([]);
-  console.log('posts', posts, isLoading, error);
-  console.log('requestedUsers', requestedUsers);
+  const { posts, isLoading: isLoadingPosts } = usePostsList();
+  const { comments, isLoading: isLoadingComments } = useCommentsList();
 
   // Preparing new users to request
   useEffect(() => {
@@ -56,6 +65,25 @@ export default function Home() {
   }, [usersToRequest, requestedUsers]);
 
   return (
-    <ul>{posts && posts.map((post) => <li key={post.id}>{post.title}</li>)}</ul>
+    <>
+      <div>
+        {posts &&
+          posts
+            .sort((a, b) => 0.5 - Math.random())
+            .map((post) => (
+              <PostCard
+                key={post.id}
+                title={post.title}
+                userName={requestedUsers[post.userId]?.username}
+                nComments={comments?.filter((c) => c.postId === post.id).length}
+                likes={Math.floor(Math.random() * 89 + 11)}
+                views={Math.floor(Math.random() * 89 + 11)}
+                postSrc={`https://picsum.photos/290/190?random=${post.id}`}
+                userSrc={`https://loremflickr.com/56/56/portrait?random=${post.userId}`}
+              />
+            ))}
+      </div>
+      <style jsx>{homeStyles}</style>
+    </>
   );
 }
