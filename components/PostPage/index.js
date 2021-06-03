@@ -29,6 +29,7 @@ const postPageStyles = css`
   }
   .commentItem {
     border: 1px solid ${colors.separator};
+    border-radius: 4px;
     padding: 8px;
     margin-bottom: 16px;
   }

@@ -86,15 +86,15 @@ export default function Home() {
       <div>
         {posts &&
           posts
-            .sort((a, b) => (a.title < b.title ? -1 : 1))
+            .sort((a, b) => (a.title < b.title ? -1 : 1)) // ordered alphabetically
             .map((post) => (
               <PostCard
                 key={post.id}
                 title={post.title}
                 userName={requestedUsers[post.userId]?.username}
                 nComments={comments?.filter((c) => c.postId === post.id).length}
-                likes={Math.floor(Math.random() * 89 + 11)}
-                views={Math.floor(Math.random() * 89 + 11)}
+                likes={post.title.length + 20} // random mocked numbers
+                views={post.title.length + 13} // random mocked numbers
                 postSrc={`https://picsum.photos/1160/190?random=${post.id}`}
                 userSrc={`https://loremflickr.com/150/150/portrait?random=${post.userId}`}
                 postTitleOnClick={() => router.push(`/posts/${post.id}`)}
