@@ -129,14 +129,14 @@ export default function PostCard({
 }
 
 PostCard.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   userName: PropTypes.string,
   nComments: PropTypes.number,
-  likes: PropTypes.number,
-  views: PropTypes.number,
-  postSrc: PropTypes.string,
+  likes: PropTypes.number.isRequired,
+  views: PropTypes.number.isRequired,
+  postSrc: PropTypes.string.isRequired,
   userSrc: PropTypes.string,
-  postTitleOnClick: PropTypes.func,
+  postTitleOnClick: PropTypes.func.isRequired,
   userOnClick: PropTypes.func,
   withProfileInfo: PropTypes.bool,
 };

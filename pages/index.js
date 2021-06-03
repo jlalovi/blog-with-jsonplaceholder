@@ -9,6 +9,7 @@ const homeStyles = css`
   div {
     text-align: center;
     margin-top: 36px;
+    margin-bottom: 36px;
   }
 `;
 
@@ -86,7 +87,7 @@ export default function Home() {
                 likes={Math.floor(Math.random() * 89 + 11)}
                 views={Math.floor(Math.random() * 89 + 11)}
                 postSrc={`https://picsum.photos/290/190?random=${post.id}`}
-                userSrc={`https://loremflickr.com/56/56/portrait?random=${post.userId}`}
+                userSrc={`https://loremflickr.com/150/150/portrait?random=${post.userId}`}
                 postTitleOnClick={() => router.push(`/posts/${post.id}`)}
                 userOnClick={() => router.push(`/users/${post.userId}`)}
                 withProfileInfo
