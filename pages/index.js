@@ -86,7 +86,7 @@ export default function Home() {
                 nComments={comments?.filter((c) => c.postId === post.id).length}
                 likes={Math.floor(Math.random() * 89 + 11)}
                 views={Math.floor(Math.random() * 89 + 11)}
-                postSrc={`https://picsum.photos/290/190?random=${post.id}`}
+                postSrc={`https://picsum.photos/1160/190?random=${post.id}`}
                 userSrc={`https://loremflickr.com/150/150/portrait?random=${post.userId}`}
                 postTitleOnClick={() => router.push(`/posts/${post.id}`)}
                 userOnClick={() => router.push(`/users/${post.userId}`)}

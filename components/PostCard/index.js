@@ -22,7 +22,8 @@ const postCardStyles = css`
   .postImgContainer {
     width: 290px;
     height: 190px;
-    background: ${colors.emptyPlaceholderBackground};
+    background-color: ${colors.emptyPlaceholderBackground};
+    background-position: center;
   }
   .userImgContainer {
     width: 56px;
@@ -88,9 +89,10 @@ export default function PostCard({
   return (
     <>
       <div className="container">
-        <div className="postImgContainer">
-          {postSrc && <img src={postSrc} alt="postImage" />}
-        </div>
+        <div
+          className="postImgContainer"
+          style={{ backgroundImage: `url(${postSrc})` }}
+        />
         {withProfileInfo && (
           <>
             <div className="userImgContainer">
@@ -134,7 +136,7 @@ PostCard.propTypes = {
   nComments: PropTypes.number,
   likes: PropTypes.number.isRequired,
   views: PropTypes.number.isRequired,
-  postSrc: PropTypes.string.isRequired,
+  postSrc: PropTypes.string,
   userSrc: PropTypes.string,
   postTitleOnClick: PropTypes.func.isRequired,
   userOnClick: PropTypes.func,

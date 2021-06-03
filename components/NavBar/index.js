@@ -10,10 +10,13 @@ const navBarStyles = css`
     padding: 8px;
   }
   h1 {
-    color: black;
+    color: #2a3e3e;
     cursor: pointer;
     user-select: none;
     display: inline-block;
+  }
+  h1:hover {
+    color: #050606;
   }
 `;
 
@@ -22,7 +25,7 @@ export default function NavBar() {
     <>
       <header>
         <Link href="/">
-          <h1>JPH Blogs</h1>
+          <h1 title="home">JPH Blogs</h1>
         </Link>
       </header>
       <style jsx>{navBarStyles}</style>

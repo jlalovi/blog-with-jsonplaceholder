@@ -8,7 +8,7 @@ import useUserPosts from 'hooks/useUserPosts';
 import css from 'styled-jsx/css';
 import { colors } from 'styles/theme';
 
-const userPaageStyles = css`
+const userPageStyles = css`
   .userInfoContainer {
     margin-top: 48px;
 
@@ -88,13 +88,13 @@ export default function UserPage({ userId }) {
                   }
                   likes={Math.floor(Math.random() * 89 + 11)}
                   views={Math.floor(Math.random() * 89 + 11)}
-                  postSrc={`https://picsum.photos/290/190?random=${post.id}`}
+                  postSrc={`https://picsum.photos/1160/190?random=${post.id}`}
                   postTitleOnClick={() => router.push(`/posts/${post.id}`)}
                 />
               ))}
         </section>
       )}
-      <style jsx>{userPaageStyles}</style>
+      <style jsx>{userPageStyles}</style>
     </>
   );
 }
