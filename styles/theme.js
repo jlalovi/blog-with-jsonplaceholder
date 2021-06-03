@@ -10,4 +10,5 @@ export const colors = {
   separator: '#33333399',
   cardBackground: '#fff',
   emptyPlaceholderBackground: '#c5c9cc',
+  icon: '#5f6161',
 };

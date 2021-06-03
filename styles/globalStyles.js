@@ -12,6 +12,10 @@ export default css.global`
   a {
     color: ${colors.mainFont};
     text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 
   * {

@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <SWRConfig
       value={{
-        /* refreshInterval: 60000, */
+        refreshInterval: 60000,
         fetcher: (...args) => fetch(...args).then((res) => res.json()),
       }}
     >

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import usePostsList from 'hooks/usePostsList';
 import useCommentsList from 'hooks/useCommentsList';
 import PostCard from 'components/PostCard';
@@ -29,12 +30,18 @@ const getUsers = (usersToRequest) => {
 };
 
 export default function Home() {
+  const router = useRouter();
   const [requestedUsers, setRequestedUsers] = useState({});
   const [usersToRequest, setUsersToRequest] = useState([]);
+  // ** Here I'm bringing in all posts and comments.
+  // This approach is not the ideal in terms of performance if there are plenty of them.
   const { posts, isLoading: isLoadingPosts } = usePostsList();
   const { comments, isLoading: isLoadingComments } = useCommentsList();
 
-  // Preparing new users to request
+  // ** On the other hand, here this is another approach.
+  // Im bringing in only the needed users through these 2 steps:
+
+  // Step 1. Preparing new users to request
   useEffect(() => {
     if (posts?.length >= 0) {
       const newUsersToRequest =
@@ -43,7 +50,7 @@ export default function Home() {
     }
   }, [posts]);
 
-  // Requesting users
+  // Step 2. Requesting new users and saving them
   useEffect(() => {
     // checking if there is any 'userToRequest' that is not in the list of 'requestedUsers'
     const needsNewRequest = usersToRequest.some(
@@ -69,7 +76,7 @@ export default function Home() {
       <div>
         {posts &&
           posts
-            .sort((a, b) => 0.5 - Math.random())
+            .sort((a, b) => (a.title < b.title ? -1 : 1))
             .map((post) => (
               <PostCard
                 key={post.id}
@@ -80,6 +87,9 @@ export default function Home() {
                 views={Math.floor(Math.random() * 89 + 11)}
                 postSrc={`https://picsum.photos/290/190?random=${post.id}`}
                 userSrc={`https://loremflickr.com/56/56/portrait?random=${post.userId}`}
+                postTitleOnClick={() => router.push(`/posts/${post.id}`)}
+                userOnClick={() => router.push(`/users/${post.userId}`)}
+                withProfileInfo
               />
             ))}
       </div>

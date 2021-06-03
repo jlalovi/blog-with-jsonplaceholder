@@ -1,3 +1,5 @@
+// inspiration from here: https://preview.colorlib.com/#bona
+
 import PropTypes from 'prop-types';
 import css from 'styled-jsx/css';
 import { colors } from 'styles/theme';
@@ -44,13 +46,16 @@ const postCardStyles = css`
   }
   .userName {
     margin-top: 40px;
-    margin-bottom: 24px;
     font-size: 14px;
   }
   .postTitle {
+    margin-top: 24px;
     padding: 0 16px;
     font-size: 18px;
     font-weight: 700;
+  }
+  .postTitle.withoutProfile {
+    margin-top: 36px;
   }
   footer {
     position: absolute;
@@ -63,6 +68,9 @@ const postCardStyles = css`
     background: ${colors.mainBackground};
     padding: 16px 26px;
   }
+  footer div > :global(svg) {
+    color: ${colors.icon};
+  }
 `;
 
 export default function PostCard({
@@ -73,6 +81,9 @@ export default function PostCard({
   views,
   postSrc,
   userSrc,
+  postTitleOnClick,
+  userOnClick,
+  withProfileInfo,
 }) {
   return (
     <>
@@ -80,13 +91,26 @@ export default function PostCard({
         <div className="postImgContainer">
           {postSrc && <img src={postSrc} alt="postImage" />}
         </div>
-        <div className="userImgContainer">
-          {userSrc && <img className="userImg" src={userSrc} alt="postImage" />}
-        </div>
-        <p className="userName">
-          by <span>{userName}</span>
+        {withProfileInfo && (
+          <>
+            <div className="userImgContainer">
+              {userSrc && (
+                <img className="userImg" src={userSrc} alt="postImage" />
+              )}
+            </div>
+            <p className="userName">
+              by{' '}
+              <a onClick={userOnClick} aria-hidden="true">
+                {userName}
+              </a>
+            </p>
+          </>
+        )}
+        <p className={`postTitle ${!withProfileInfo ? 'withoutProfile' : ''}`}>
+          <a onClick={postTitleOnClick} aria-hidden="true">
+            {title}
+          </a>
         </p>
-        <p className="postTitle">{title}</p>
         <footer>
           <div>
             <Eye /> <span>{views}</span>
@@ -112,4 +136,7 @@ PostCard.propTypes = {
   views: PropTypes.number,
   postSrc: PropTypes.string,
   userSrc: PropTypes.string,
+  postTitleOnClick: PropTypes.func,
+  userOnClick: PropTypes.func,
+  withProfileInfo: PropTypes.bool,
 };
