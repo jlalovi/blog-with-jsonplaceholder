@@ -7,6 +7,8 @@ import Avatar from 'components/Avatar';
 import useUserPosts from 'hooks/useUserPosts';
 import css from 'styled-jsx/css';
 import { colors } from 'styles/theme';
+import { useEffect } from 'react';
+import NProgress from 'nprogress';
 
 const userPageStyles = css`
   .userInfoContainer {
@@ -50,6 +52,15 @@ export default function UserPage({ userId }) {
   const { user, isLoading: isLoadingUser } = useUser(userId);
   const { comments, isLoading: isLoadingComments } = useCommentsList();
   const { userPosts, isLoading: isLoadingUserPosts } = useUserPosts(userId);
+
+  useEffect(() => {
+    if (isLoadingUser || isLoadingComments || isLoadingUserPosts) {
+      NProgress.start();
+    } else {
+      NProgress.done();
+    }
+  }, [isLoadingUser, isLoadingComments, isLoadingUserPosts]);
+
   return (
     <>
       {user && (

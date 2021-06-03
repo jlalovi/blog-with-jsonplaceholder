@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import usePost from 'hooks/usePost';
 import useUser from 'hooks/useUser';
@@ -6,6 +7,7 @@ import usePostComments from 'hooks/usePostComments';
 import PostPaper from 'components/PostPaper';
 import css from 'styled-jsx/css';
 import { colors } from 'styles/theme';
+import NProgress from 'nprogress';
 
 const postPageStyles = css`
   .postPaperContainer {
@@ -47,11 +49,16 @@ export default function PostPage({ postId }) {
   const router = useRouter();
   const { post, isLoading: isLoadingPost } = usePost(postId);
   const { user, isLoading: isLoadingUser } = useUser(post?.userId);
-  const {
-    comments,
-    isLoading: isLoadingPostComments,
-    error: errorPostComments,
-  } = usePostComments(postId);
+  const { comments, isLoading: isLoadingPostComments } =
+    usePostComments(postId);
+
+  useEffect(() => {
+    if (isLoadingUser || isLoadingPostComments || isLoadingPost) {
+      NProgress.start();
+    } else {
+      NProgress.done();
+    }
+  }, [isLoadingUser, isLoadingPostComments, isLoadingPost]);
 
   return (
     <>

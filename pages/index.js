@@ -4,6 +4,7 @@ import usePostsList from 'hooks/usePostsList';
 import useCommentsList from 'hooks/useCommentsList';
 import PostCard from 'components/PostCard';
 import css from 'styled-jsx/css';
+import NProgress from 'nprogress';
 
 const homeStyles = css`
   div {
@@ -71,6 +72,14 @@ export default function Home() {
       fetchData();
     }
   }, [usersToRequest, requestedUsers]);
+
+  useEffect(() => {
+    if (isLoadingPosts || isLoadingComments) {
+      NProgress.start();
+    } else {
+      NProgress.done();
+    }
+  }, [isLoadingPosts, isLoadingComments]);
 
   return (
     <>
