@@ -8,6 +8,13 @@ const navBarStyles = css`
     color: ${colors.navFont};
     border-bottom: 2px solid ${colors.separator};
     padding: 8px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  .headerHeight {
+    height: 50px;
   }
   h1 {
     color: #2a3e3e;
@@ -28,6 +35,7 @@ export default function NavBar() {
           <h1 title="home">JPH Blogs</h1>
         </Link>
       </header>
+      <div className="headerHeight" />
       <style jsx>{navBarStyles}</style>
     </>
   );
